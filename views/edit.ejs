@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit your chat</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef3fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .edit-container {
+            background: rgba(255, 255, 255, 0.75);
+            padding: 30px 35px;
+            border-radius: 20px;
+            width: 380px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .meta {
+            font-size: 15px;
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 15px;
+            outline: none;
+            resize: vertical;
+            transition: 0.2s;
+        }
+
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+        }
+
+        button {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #059669;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="edit-container">
+
+        <h3>Edit Chat ⚙️</h3>
+
+        <p class="meta">Chat ID: <b><%= chat._id %></b></p>
+        <p class="meta">
+            Sent from <b><%= chat.from %></b> to <b><%= chat.to %></b>
+        </p>
+
+        <form method="POST" action="/chats/<%= chat._id %>?_method=PUT">
+            <textarea name="msg"><%= chat.msg %></textarea>
+            <button>Update Chat</button>
+        </form>
+
+    </div>
+
+</body>
+</html>

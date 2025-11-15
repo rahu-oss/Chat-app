@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>All Chats!</h3>
+    <button id="dark-toggle">Dark Mode</button>
+    <form method="get" action="/chats/new">
+        <button class="new-chat-btn">New Chat</button>
+    </form>
+    <%for(let chat of chats){%>
+    <div class="chat-card">
+        <p class="chat-meta"> <i>From: <%=chat.from%> </i></p>
+        <div class="sender-bubble">
+            <p><%=chat.msg%></p>
+            <form method="get" action="/chats/<%=chat._id%>/edit" style="display:inline;">
+                <button class="edit-btn">Edit</button>
+            </form>
+              <form method="post" action="/chats/<%=chat._id%>?_method=DELETE" style="display:inline;">
+                <button class="delete-btn">Delete</button>
+            </form>
+        </div>
+        <p class="chat-meta"> <i>Receved by: <%=chat.to%> </i></p>
+        <hr/>
+        <div class="timestamp">
+            <p><%= chat.created_at.toString().split(" ")[4] %></p>
+            <p><%= chat.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+        </div>
+    </div>
+    <br><br>
+<%}%>
+
+<script>
+    document.getElementById("dark-toggle").onclick = function () {
+        document.body.classList.toggle("dark");
+    };
+</script>
+
+</body>
+</html>
+
