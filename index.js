@@ -68,7 +68,7 @@ app.delete("/chats/:id", async(req,res)=>{
 });
 
 app.get("/", (req,res)=>{
-    res.send("App Working!");
+    res.redirect("/chats");
 });
 
 // PORT FIX for Render
